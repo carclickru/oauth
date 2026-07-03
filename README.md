@@ -22,6 +22,30 @@ ID, обрабатывает callback, восстанавливает польз
 - точные `Valid post logout redirect URIs`;
 - точные `Web origins`.
 
+Keycloak проверяет `redirect_uri` как часть настроек конкретного `clientId`.
+URI, схема, домен, порт и путь должны совпасть. Например, эти адреса разные:
+
+```text
+https://pay4car.me/auth/carclick/callback
+http://localhost:3000/auth/carclick/callback
+```
+
+Для разработки используйте отдельный dev-client либо добавьте localhost URI в
+разрешённые адреса. На production не используйте fallback client ID:
+
+```ts
+const clientId = import.meta.env.VITE_CARCLICK_CLIENT_ID;
+if (!clientId) throw new Error("VITE_CARCLICK_CLIENT_ID is required");
+```
+
+Для `Web origins` указывается origin без завершающего `/`:
+
+```text
+https://pay4car.me
+```
+
+Значение `*` на production использовать не рекомендуется.
+
 Организации передаются только `clientId` и согласованные callback URL. Никаких
 client secret в React/Next frontend быть не должно.
 
@@ -169,7 +193,7 @@ type CarClickSession = {
 Обновите `version` в `package.json` и отправьте совпадающий тег:
 
 ```bash
-git tag v1.0.0
+git tag v1.0.1
 git push origin master --tags
 ```
 
