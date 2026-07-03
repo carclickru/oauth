@@ -1,0 +1,55 @@
+{
+  "name": "@carclickru/oauth",
+  "version": "1.0.0",
+  "description": "CarClick ID OIDC client for React and Next.js applications",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/oauth.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carclickru/oauth.git"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.build.json && vite build",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "oidc-client-ts": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
