@@ -14,11 +14,11 @@ export function CarClickAuthCallback({
   loading = null,
   errorFallback
 }: CarClickAuthCallbackProps) {
-  const { completeSignIn, error } = useCarClickAuth();
+  const { completeSignIn, error, isLoading } = useCarClickAuth();
   const started = useRef(false);
 
   useEffect(() => {
-    if (started.current) return;
+    if (isLoading || started.current) return;
     started.current = true;
 
     void completeSignIn()
@@ -30,7 +30,7 @@ export function CarClickAuthCallback({
           reason instanceof Error ? reason : new Error(String(reason));
         onError?.(callbackError);
       });
-  }, [completeSignIn, onError, onSuccess]);
+  }, [completeSignIn, isLoading, onError, onSuccess]);
 
   if (error && errorFallback) return errorFallback(error);
   return loading;

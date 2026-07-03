@@ -10,24 +10,28 @@ import { useOptionalCarClickAuth } from "./auth";
 import "./styles.css";
 
 type CommonProps = {
-  /** Text displayed inside the button. */
-  children?: ReactNode;
   /** Replaces the built-in CarClick mark. */
   icon?: ReactNode;
-  /** Accessible label. Defaults to the text value. */
+  /** Accessible label. The visible brand label is always CARCLICK ID. */
   "aria-label"?: string;
   className?: string;
   disabled?: boolean;
 };
 
 type LinkProps = CommonProps &
-  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof CommonProps | "href"> & {
+  Omit<
+    AnchorHTMLAttributes<HTMLAnchorElement>,
+    keyof CommonProps | "children" | "href"
+  > & {
     href: string;
     onClick?: MouseEventHandler<HTMLAnchorElement>;
   };
 
 type ButtonProps = CommonProps &
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonProps> & {
+  Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    keyof CommonProps | "children"
+  > & {
     href?: never;
     onClick?: MouseEventHandler<HTMLButtonElement>;
   };
@@ -48,13 +52,7 @@ export const CarClickOAuthButton = forwardRef<
   HTMLAnchorElement | HTMLButtonElement,
   CarClickOAuthButtonProps
 >(function CarClickOAuthButton(
-  {
-    children = "CARCLICK ID",
-    icon,
-    className,
-    disabled = false,
-    ...props
-  },
+  { icon, className, disabled = false, ...props },
   ref
 ) {
   const auth = useOptionalCarClickAuth();
@@ -64,7 +62,7 @@ export const CarClickOAuthButton = forwardRef<
       <span className="carclick-oauth-button__icon" aria-hidden="true">
         {icon ?? <CarClickLogo />}
       </span>
-      <span className="carclick-oauth-button__label">{children}</span>
+      <span className="carclick-oauth-button__label">CARCLICK ID</span>
     </>
   );
 

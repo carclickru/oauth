@@ -11,6 +11,9 @@ https://passport.carclick.ru/realms/master
 ID, обрабатывает callback, восстанавливает пользователя после перезагрузки и
 обновляет access token.
 
+Надпись брендированной кнопки всегда фиксирована: `CARCLICK ID`. Компонент не
+принимает `children`, поэтому интегратор не может заменить текст кнопки.
+
 ## Что должна получить сторонняя организация
 
 Для каждой интеграции CarClick создаёт в Keycloak отдельный public client:
@@ -193,7 +196,7 @@ type CarClickSession = {
 Обновите `version` в `package.json` и отправьте совпадающий тег:
 
 ```bash
-git tag v1.0.1
+git tag v1.0.3
 git push origin master --tags
 ```
 

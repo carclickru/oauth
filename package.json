@@ -1,6 +1,6 @@
 {
   "name": "@carclickru/oauth",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "CarClick ID OIDC client for React and Next.js applications",
   "license": "MIT",
   "type": "module",
