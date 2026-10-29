@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: [self-hosted, linux, x64, carclick]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
